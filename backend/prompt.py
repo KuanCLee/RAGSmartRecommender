@@ -1,10 +1,13 @@
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.prompts import PromptTemplate
 
-class RAGInstructionsGenerator():
-    def prompt_template(self):
+class RAGInstructionsGenerator:
+    def output_parser(self):
+        return PydanticOutputParser(pydantic_object=YourPydanticModel)  #TODO
 
+    def get_prompt_template(self):
         parser = self.output_parser()
+        
         claude_template = """
         <role>
             You are an AI assistant tasked with identifying products relevant to customer inquiries. You will receive a customer enquiry along with relevant context to assist you.
@@ -42,7 +45,7 @@ class RAGInstructionsGenerator():
         """
 
         prompt_template = PromptTemplate(
-            input_variables=["transcription", "feed"],
+            input_variables=["enquiry", "context", "feed"],
             template=claude_template,
             partial_variables={
                 "format_instructions": parser.get_format_instructions()
