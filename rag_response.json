@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "name": "SanDisk Ultra 128 GB USB 3.0 Pen Drive (Black)",
+      "relevance_score": 0.9,
+      "description": "USB 3.0 enabled (USB 2.0 compatible)|Transfer up to 10 times faster than standard USB 2.0 drives; up to 100MB/s read speed|Secure file encryption and password protection|Stylish and portable design|SanDisk secure access software keeps files private|Country of Origin: Malaysia",
+      "reason": "This product is relevant because it is a USB 3.0 drive with a high read speed of up to 100MB/s. It also offers secure file encryption and password protection."
+    },
+    {
+      "name": "SanDisk Ultra Flair 64GB USB 3.0 Pen Drive, Multicolor",
+      "relevance_score": 0.85,
+      "description": "High-speed USB 3.0 performance of up to 150MB/s read speeds|Transfer a full-length movie in less than 30 seconds!|The drive’s durable and stylish metal casing keeps your important files safe, while the included SanDisk SecureAccess software lets you password-protect and encrypt your sensitive files|Compatible with both USB 2.0 and 3.0 ports, Operating temperature32° – 95°F (0° – 35°C)|Country of Origin: Malaysia|9th Generation Intel Core i9 ProcessorsProducts formerly Coffee LakeDesktopLithography14 nmProcessor Base Frequency3.60 GHzTDP95 WIntel UHD Graphics 630350 MHz|BX80684I99900K",
+      "reason": "This product is relevant because it offers high-speed USB 3.0 performance with read speeds of up to 150MB/s. It also provides secure file encryption and password protection."
+    },
+    {
+      "name": "SanDisk Ultra Dual Drive Go USB Type C Pendrive for Mobile (Black, 128 GB, 5Y - SDDDC3-128G-I35)",
+      "relevance_score": 0.8,
+      "description": "The 2-in-1 flash drive with a reversible USB Type-C and a traditional Type-A connector.|Seamlessly move content between your USB Type-C smartphone, tablets and Macs and USB Type-A computers.|Free up space on your USB Type-C smartphone so you can take more photos.|Automatically back up photos using the SanDisk Memory Zone app|High-performance USB 3.1 Gen 1 drive with 150MB/s read speeds lets you quickly move your files to your computer.1|Dual-purpose swivel design protects connectors and features a keyring hole to take your drive on the go.",
+      "reason": "This product is relevant because it is a high-performance USB 3.1 Gen 1 drive with read speeds of 150MB/s. It also features a 2-in-1 design with both USB Type-C and Type-A connectors."
+    },
+    {
+      "name": "SanDisk Cruzer Blade 32GB USB Flash Drive",
+      "relevance_score": 0.75,
+      "description": "Ultra-compact and portable USB flash drive,Capless design|Share your photos, videos, songs and other files between computers with ease,care number:18001205899/18004195592|Protect your private files with included SanDisk SecureAccess software|Includes added protection of secure online backup (up to 2GB optionally available) offered by YuuWaa|Password-protect your sensitive files. Customer care:IndiaSupport@sandisk.com|Importer Details:Rashi Peripherals Pvt. Ltd. Rashi Complex,A Building,Survey186,Dongaripada,Poman Village,Vasai Bhiwandi Road, Dist. Thane,Maharastra 401208, India|Share your work files between computers with ease",
+      "reason": "This product is relevant because it is a compact and portable USB flash drive that allows for easy sharing of files between computers. It also offers secure file encryption and password protection."
+    },
+    {
+      "name": "Kingston DataTraveler Exodia DTX/32 GB Pen Drive USB 3.2 Gen 1 (Multicolor)",
+      "relevance_score": 0.7,
+      "description": "Large loop easily attaches to key rings|Practical cap protects the USB plug|Multiple colour options by capacity|Backed by a five-year warranty, free technical support and legendary Kingston reliability",
+      "reason": "This product is relevant because it is a USB 3.2 Gen 1 pen drive that comes with a five-year warranty and free technical support. It also features a practical cap to protect the USB plug."
+    }
+  ]
+}

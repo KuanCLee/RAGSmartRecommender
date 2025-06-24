@@ -94,6 +94,8 @@ class RAGIndexer:
         results = retriever.get_relevant_documents(query)
         for i, doc in enumerate(results):
             print(f"\n--- Document {i + 1} ---\n{doc.page_content[:300]}...")
+        
+        return results
 
 if __name__ == "__main__":
     indexer = RAGIndexer(

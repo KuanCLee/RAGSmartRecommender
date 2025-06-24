@@ -1,6 +1,6 @@
 from backend.prompt import RAGInstructionsGenerator
 
-class AgenticSystem:
+class RAGPromptSystem:
     def __init__(self, llm):
         self.llm = llm  # Assumes llm is passed in during initialization
 
@@ -8,13 +8,16 @@ class AgenticSystem:
         # Instantiate the prompt helper
         advisor_instance = RAGInstructionsGenerator()
         prompt = advisor_instance.get_prompt_template()
+        parser = advisor_instance.output_parser()
 
         # Format the prompt with user inputs
         filled_prompt = prompt.format(
             enquiry=enquiry,
             context=context
         )
-
         # Pipe it through the LLM and parse
-        chain = filled_prompt | self.llm | advisor_instance.output_parser()
-        return chain.invoke({})
+        chain = prompt | self.llm | parser
+        return chain.invoke({
+            "enquiry": enquiry,
+            "context": context
+        })
