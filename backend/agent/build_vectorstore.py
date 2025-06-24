@@ -12,19 +12,28 @@ class RAGIndexer:
     def __init__(
         self,
         collection_base_name="collection",
-        persist_dir="../../vector_database",
+        persist_dir="RAG/vector_database",
         batch_size=50,
         df: pd.DataFrame = None,
+        openai_api_key: str = None,
     ):
-        load_dotenv(dotenv_path=os.path.join("..", "..", "Kuan.env"))
-        self.api_key = os.getenv("OPENAI_API_KEY")
-        self.embedding_model = OpenAIEmbeddings()
+        # Use passed key or fallback to env loading (optional)
+        if openai_api_key:
+            self.api_key = openai_api_key
+        else:
+            load_dotenv(dotenv_path=os.path.join("..", "..", "Kuan.env"))
+            self.api_key = os.getenv("OPENAI_API_KEY")
+
+        if not self.api_key:
+            raise ValueError("OPENAI_API_KEY is required!")
+
+        self.embedding_model = OpenAIEmbeddings(openai_api_key=self.api_key)
         self.persist_dir = persist_dir
         self.collection_base_name = collection_base_name
         self.batch_size = batch_size
         self.user_df = df
         os.makedirs(self.persist_dir, exist_ok=True)
-
+        
     def _chunk_list(self, lst, n):
         for i in range(0, len(lst), n):
             yield lst[i : i + n]
@@ -75,7 +84,7 @@ class RAGIndexer:
         print("All batches added to a single collection!")
 
 
-    def query_vectorstore(self, query, collection_name="my_combined_collection", top_k=5):
+    def query_vectorstore(self, query, collection_name="collection", top_k=5):
         retriever = Chroma(
             collection_name=collection_name,
             embedding_function=self.embedding_model,
@@ -94,4 +103,3 @@ if __name__ == "__main__":
     )
     
     indexer.build_vectorstore()
-    
