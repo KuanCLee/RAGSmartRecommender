@@ -9,12 +9,6 @@ class RAGPromptSystem:
         advisor_instance = RAGInstructionsGenerator()
         prompt = advisor_instance.get_prompt_template()
         parser = advisor_instance.output_parser()
-
-        # Format the prompt with user inputs
-        filled_prompt = prompt.format(
-            enquiry=enquiry,
-            context=context
-        )
         # Pipe it through the LLM and parse
         chain = prompt | self.llm | parser
         return chain.invoke({
