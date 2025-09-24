@@ -1,16 +1,45 @@
-> 🚧 **THIS PROJECT IS STILL IN PROGRESS** 🚧
+> 🚧 **PROJECT IN PROGRESS**  
+> This is a work-in-progress prototype!
 
+# 🛒 RAG Product Recommendation System
 
-# RAG Product Recommendation
+This repository showcases a prototype for a **Retrieval-Augmented Generation (RAG)** system that recommends products based on customer inquiries. It combines **semantic search** over product descriptions with **LLM-powered generation** to provide relevant and explainable recommendations.
 
-This repository aims to build a **Retrieval-Augmented Generation (RAG)** system designed to recommend products based on their descriptions. The system leverages powerful embedding models and vector search to find the most relevant products tailored to user queries.
+As a demonstration, we use publicly available product data from [Kaggle: Amazon Sales Dataset](https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset?select=amazon.csv) to simulate real-world queries and recommendations.
 
-As a prototype, this project uses publicly available product data from [Kaggle](https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset?select=amazon.csv) to demonstrate the feasibility and effectiveness of the approach.
+---
 
+## 🔧 Technologies Used
 
-## Technologies Used
+- **Python**
+- **OpenAI** (for embeddings and language generation)
+- **Chroma** (for vector storage and retrieval)
+- **LangChain** (for prompt templates, parsers, and chains)
+- **Pandas** (for data preprocessing and transformation)
+- *(Coming soon: Streamlit or React for UI)*
 
-- Python  
-- OpenAI embeddings  
-- Chroma (vector database)  
-- Pandas for data handling  
+---
+
+## 🧩 System Overview
+
+The core idea of this system:
+
+1. **Embed** product descriptions using OpenAI embeddings
+2. **Store** the embeddings in a vector database (Chroma)
+3. **Retrieve** relevant products based on semantic similarity to a user query
+4. **Generate** natural language recommendations using an LLM with structured output (via Pydantic)
+
+---
+
+## 🚀 Roadmap
+
+- [x] Preprocess and embed product data
+- [x] Build and query a vector database (Chroma)
+- [x] Create a prompt template and output parser using Pydantic + LangChain
+- [x] Develop a RAG agent to retrieve and recommend products using context
+- [ ] Build an interactive frontend (Streamlit for fast prototyping or React for production use)
+- [ ] Add unit tests and CI pipeline
+- [ ] Deploy as a lightweight API or app
+
+---
+
