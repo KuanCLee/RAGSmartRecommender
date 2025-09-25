@@ -1,49 +1,90 @@
 import React, { useState } from "react";
 
-export default function RAGQueryUI() {
-  const[query, setQuery] = useState("");
-  const [response, setResponse] = useState(null);
+export default function RAGQueryUI({ responses, setResponses }) {
+  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async(e) => {
-    e.preventDefauly();
-    setLoading(true);
-    setResponse(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!query.trim()) return;
 
-    const res = await fetch("http://localhost:8000/rag", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query }),
-    });
-  
-    const data = await res.json();
-    setResponse(data);
-    setLoading(false);
+    // Immediately show user's input
+    setResponses((prev) => [...prev, { query, answer: null }]);
+    setLoading(true);
+
+    try {
+      const res = await fetch("http://localhost:8000/rag", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query }),
+      });
+      const data = await res.json();
+
+      // Update last entry with actual answer
+      setResponses((prev) =>
+        prev.map((r, i) =>
+          i === prev.length - 1 ? { ...r, answer: data } : r
+        )
+      );
+      setQuery("");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to fetch RAG data.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-xl font-bold mb-4">RAG Query UI</h1>
-      <form onSubmit={handleSubmit} className="flex gap-2 mb-4">
+    <div style={{ display: "flex", flexDirection: "column", height: "100%", padding: "10px", boxSizing: "border-box" }}>
+      <div style={{ flex: 1, overflowY: "auto", marginBottom: "10px" }}>
+        {responses.map((r, idx) => (
+          <div key={idx} style={{ marginBottom: "16px" }}>
+            <p style={{ fontWeight: "bold", marginBottom: "8px" }}>You: {r.query}</p>
+
+            {r.answer ? (
+              r.answer.products.map((product, i) => (
+                <div key={i} style={{
+                  border: "1px solid #ddd",
+                  borderRadius: "8px",
+                  padding: "12px",
+                  marginBottom: "10px",
+                  backgroundColor: "#f9f9f9",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+                }}>
+                  <h3 style={{ margin: "0 0 6px 0", fontWeight: "bold", color: "#047857" }}>{product.name}</h3>
+                  <p style={{ margin: "0 0 4px 0", color: "#555" }}><strong>Relevance:</strong> {(product.relevance_score * 100).toFixed(0)}%</p>
+                  <p style={{ margin: "0 0 4px 0", color: "#333" }}><strong>Description:</strong> {product.description.split("|").join(". ")}</p>
+                  <p style={{ margin: "0", color: "#333" }}><strong>Reason:</strong> {product.reason}</p>
+                </div>
+              ))
+            ) : loading ? <p>Loading...</p> : null}
+          </div>
+        ))}
+      </div>
+
+      <form onSubmit={handleSubmit} style={{ display: "flex", gap: "8px", marginTop: "auto" }}>
         <input
           type="text"
-          className="border rounded p-2 flex-1"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Ask your question..."
+          style={{ flex: 1, padding: "8px", borderRadius: "6px", border: "1px solid #ccc" }}
         />
-        <button className="bg-blue-500 text-white px-4 py-2 rounded">
-          Submit
+        <button
+          type="submit"
+          style={{
+            backgroundColor: "#92400e",
+            color: "#fff",
+            border: "none",
+            padding: "8px 12px",
+            borderRadius: "6px",
+            cursor: "pointer",
+          }}
+        >
+          Send
         </button>
       </form>
-      {loading && <p>Loading...</p>}
-      {response && (
-        <pre className="bg-gray-100 p-3 rounded text-sm overflow-x-auto">
-          {JSON.stringify(response, null, 2)}
-        </pre>
-      )}
     </div>
   );
-
 }
-
