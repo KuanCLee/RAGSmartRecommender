@@ -7,7 +7,7 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    Papa.parse("/static/product_data/products.csv", {
+    Papa.parse("/public/product_data/products.csv", {
       download: true,
       header: true,
       complete: (results) => {
@@ -34,7 +34,7 @@ const Shop = () => {
           position: "relative",
           width: "100%",
           aspectRatio: "2000/800",
-          backgroundImage: "url('/static/banner.png')",
+          backgroundImage: "url('/public/banner.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           display: "flex",
