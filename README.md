@@ -41,7 +41,7 @@ The core idea of this system:
 - [x] Create a prompt template and output parser using Pydantic + LangChain
 - [x] Develop a RAG agent to retrieve and recommend products based on context
 - [x] Build an interactive frontend (Streamlit for quick prototyping or Vite + React for production)
-- [ ] Integrate the agent into the frontend
+- [x] Integrate the agent into the frontend
 - [ ] Deploy as a lightweight API or web app
 
 ---
