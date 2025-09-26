@@ -2,4 +2,3 @@
 __pycache__/
 *.pyc
 Kuan.env
-vector_database/
