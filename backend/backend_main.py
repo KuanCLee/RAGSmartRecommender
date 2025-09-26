@@ -25,10 +25,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load environment variables
-load_dotenv(dotenv_path="Kuan.env")
+# Optional: only load .env if exists (local development)
+if os.path.exists("Kuan.env"):
+    load_dotenv(dotenv_path="Kuan.env")
+
+# Always read environment variable
 openai_api_key = os.getenv("OPENAI_API_KEY")
-print("Loaded OPENAI_API_KEY:", openai_api_key is not None)
+if openai_api_key is None:
+    raise ValueError("OPENAI_API_KEY is not set in environment variables!")
 
 class QueryRequest(BaseModel):
     query:str
