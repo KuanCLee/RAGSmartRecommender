@@ -1,7 +1,7 @@
 > 🚧 **PROJECT IN PROGRESS**  
 > This is a work-in-progress prototype!
 
-# 🛒 RAG Product Recommendation System
+# RAG Product Recommendation System
 
 This repository showcases a prototype for a **Retrieval-Augmented Generation (RAG)** system that recommends products based on customer inquiries. It combines **semantic search** over product descriptions with **LLM-powered generation** to provide accurate and explainable recommendations.
 
@@ -12,18 +12,18 @@ To demonstrate its capabilities, I also built a small **web demo selling glasses
 ![Demo of RAG Product Recommendation System](demo/Demo.gif)
 
 
-## 🔧 Technologies Used
+## Technologies Used
 
-- **Python**
-- **OpenAI** (for embeddings and language generation)
-- **Chroma** (for vector storage and retrieval)
-- **LangChain** (for prompt templates, parsers, and chains)
-- **Pandas** (for data preprocessing and transformation)
-- *(Coming soon: Streamlit or React for UI)*
-
+- **Python** – for data processing and RAG logic
+- **OpenAI** – embeddings and language generation
+- **Chroma** – vector storage and semantic search
+- **LangChain** – prompt templates, parsers, and chains
+- **Pandas** – data preprocessing and transformation
+- **Vite + React** – for building a fast, modern frontend
+- 
 ---
 
-## 🧩 System Overview
+## System Overview
 
 The core idea of this system:
 
@@ -34,15 +34,15 @@ The core idea of this system:
 
 ---
 
-## 🚀 Roadmap
+## Roadmap
 
 - [x] Preprocess and embed product data
 - [x] Build and query a vector database (Chroma)
 - [x] Create a prompt template and output parser using Pydantic + LangChain
-- [x] Develop a RAG agent to retrieve and recommend products using context
-- [ ] Build an interactive frontend (Streamlit for fast prototyping or React for production use)
-- [ ] Add unit tests and CI pipeline
-- [ ] Deploy as a lightweight API or app
+- [x] Develop a RAG agent to retrieve and recommend products based on context
+- [x] Build an interactive frontend (Streamlit for quick prototyping or Vite + React for production)
+- [ ] Integrate the agent into the frontend
+- [ ] Deploy as a lightweight API or web app
 
 ---
 
