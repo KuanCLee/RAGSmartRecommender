@@ -14,7 +14,7 @@ export default function RAGQueryUI({ responses, setResponses }) {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/rag", {
+      const res = await fetch("https://ragsmartrecommender.onrender.com/rag", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query }),
