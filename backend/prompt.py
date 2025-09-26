@@ -51,6 +51,8 @@ class RAGInstructionsGenerator:
                 - Strictly follow the output format instructions without adding any extra text or XML tags before or after.
                 - Double-check that your output is valid JSON before finishing.
                 - Do not include headers or code block indicators such as ```json```.
+                - The "product_id" field must be an integer. Do not return it as a string.
+                - The "relevance_score" field should be a float between 0 and 1.
             </output_guidance>
             """
 
