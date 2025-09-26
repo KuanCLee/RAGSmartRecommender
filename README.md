@@ -3,12 +3,14 @@
 
 # 🛒 RAG Product Recommendation System
 
-This repository showcases a prototype for a **Retrieval-Augmented Generation (RAG)** system that recommends products based on customer inquiries. It combines **semantic search** over product descriptions with **LLM-powered generation** to provide relevant and explainable recommendations.
+This repository showcases a prototype for a **Retrieval-Augmented Generation (RAG)** system that recommends products based on customer inquiries. It combines **semantic search** over product descriptions with **LLM-powered generation** to provide accurate and explainable recommendations.
 
-As a demonstration, we use publicly available product data from [Kaggle: Amazon Sales Dataset](https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset?select=amazon.csv) to simulate real-world queries and recommendations.
+To demonstrate its capabilities, I also built a small **web demo selling glasses**, showing how this RAG system can be integrated seamlessly into a website.
 
 ---
-![Demo GIF](demo/Demo.gif)
+
+![Demo of RAG Product Recommendation System](demo/Demo.gif)
+
 
 ## 🔧 Technologies Used
 
