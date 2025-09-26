@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react
 import Shop from "./pages/Shop";
 import ProductPage from "./pages/ProductPage";
 import RAGQueryUI from "./components/RAG_Query_UI";
-import landingVideo from "./public/landingVideo.mp4";
-import speakerOn from "./public/speaker-on.png";
-import speakerOff from "./public/speaker-off.png";
+import landingVideo from "/landingVideo.mp4";
+import speakerOn from "/speaker-on.png";
+import speakerOff from "/speaker-off.png";
 
 function VideoBanner() {
   const location = useLocation();

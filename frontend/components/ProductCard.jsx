@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const ProductCard = ({ product, index }) => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  const imagePath = `/public/product_image/image_product_${index + 1}.png`;
+  const imagePath = `/product_image/image_product_${index + 1}.png`;
 
   // Render rating as stars
   const renderStars = (rating) => {

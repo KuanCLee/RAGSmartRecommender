@@ -8,7 +8,7 @@ export default function ProductPage() {
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    Papa.parse("/public/product_data/products.csv", {
+    Papa.parse("/product_data/products.csv", {
       download: true,
       header: true,
       complete: (results) => {
@@ -26,7 +26,7 @@ export default function ProductPage() {
       {/* Product Image */}
       <div style={{ flex: 1 }}>
         <img
-          src={`/public/product_image/image_product_${product.product_id}.png`}
+          src={`/product_image/image_product_${product.product_id}.png`}
           alt={product.name}
           style={{ width: "100%", borderRadius: "12px", objectFit: "contain" }}
         />
