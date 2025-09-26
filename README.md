@@ -8,7 +8,7 @@ This repository showcases a prototype for a **Retrieval-Augmented Generation (RA
 As a demonstration, we use publicly available product data from [Kaggle: Amazon Sales Dataset](https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset?select=amazon.csv) to simulate real-world queries and recommendations.
 
 ---
-![Demo GIF](demo/Demo-ezgif.com-optimize.gif)
+![Demo GIF](demo/Demo.gif)
 
 ## 🔧 Technologies Used
 
