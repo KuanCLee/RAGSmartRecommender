@@ -5,7 +5,7 @@
 
 This repository showcases a prototype for a **Retrieval-Augmented Generation (RAG)** system that recommends products based on customer inquiries. It combines **semantic search** over product descriptions with **LLM-powered generation** to provide accurate and explainable recommendations.
 
-To demonstrate its capabilities, I also built a small **web demo selling glasses**, showing how this RAG system can be integrated seamlessly into a website.
+To show it off, I built a small web demo selling glasses, letting customers quickly find their best fit just by asking questions.
 
 ---
 
@@ -41,7 +41,7 @@ The core idea of this system:
 - [x] Create a prompt template and output parser using Pydantic + LangChain
 - [x] Develop a RAG agent to retrieve and recommend products based on context
 - [x] Build an interactive frontend (Streamlit for quick prototyping or Vite + React for production)
-- [ ] Integrate the agent into the frontend
+- [x] Integrate the agent into the frontend
 - [ ] Deploy as a lightweight API or web app
 
 ---
