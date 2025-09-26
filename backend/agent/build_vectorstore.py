@@ -4,14 +4,13 @@ from dotenv import load_dotenv
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.schema import Document
-import kagglehub
 import time
 import gc
 
 class RAGIndexer:
     def __init__(
         self,
-        collection_base_name="collection",
+        collection_base_name="glasses_sales",
         persist_dir="RAG/vector_database",
         batch_size=50,
         df: pd.DataFrame = None,
@@ -20,8 +19,13 @@ class RAGIndexer:
         # Use passed key or fallback to env loading (optional)
         if openai_api_key:
             self.api_key = openai_api_key
+
         else:
-            load_dotenv(dotenv_path=os.path.join("..", "..", "Kuan.env"))
+            # Determine project root dynamically
+            script_dir = os.path.dirname(os.path.abspath(__file__))  # backend/agent
+            project_root = os.path.dirname(os.path.dirname(script_dir))  # RAGSmartRecommender
+            dotenv_path = os.path.join(project_root, "Kuan.env")
+            load_dotenv(dotenv_path=dotenv_path)
             self.api_key = os.getenv("OPENAI_API_KEY")
 
         if not self.api_key:
@@ -43,11 +47,11 @@ class RAGIndexer:
             print("Using user-provided DataFrame.")
             df = self.user_df
         else:
-            print("Using default Kaggle dataset.")
-            dataset_dir = kagglehub.dataset_download("karkavelrajaj/amazon-sales-dataset")
-            files = os.listdir(dataset_dir)
-            print("Downloaded files:", files)
-            csv_path = os.path.join(dataset_dir, files[0])
+            # Use your local CSV instead of Kaggle
+            csv_path = "./frontend/static/product_data/products.csv"
+            if not os.path.exists(csv_path):
+                raise FileNotFoundError(f"{csv_path} not found!")
+            print(f"Loading local CSV: {csv_path}")
             df = pd.read_csv(csv_path, sep=',', on_bad_lines='skip')
 
         df_json = df.to_dict(orient="records")
@@ -84,7 +88,7 @@ class RAGIndexer:
         print("All batches added to a single collection!")
 
 
-    def query_vectorstore(self, query, collection_name="collection", top_k=5):
+    def query_vectorstore(self, query, collection_name="glasses_sales", top_k=3):
         retriever = Chroma(
             collection_name=collection_name,
             embedding_function=self.embedding_model,
@@ -98,10 +102,35 @@ class RAGIndexer:
         return results
 
 if __name__ == "__main__":
-    indexer = RAGIndexer(
-        collection_base_name="amazon_sales",
-        batch_size=100,  
-        df=None  
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Build vector store from CSV")
+    parser.add_argument(
+        "--csv",
+        type=str,
+        default = "./frontend/static/product_data/products.csv",
+        help="Path to the CSV file to load",
     )
-    
+    parser.add_argument(
+        "--collection",
+        type=str,
+        default="glasses_sales",
+        help="Vector store collection name",
+    )
+    parser.add_argument(
+        "--batch_size",
+        type=int,
+        default=100,
+        help="Batch size for vector insertion",
+    )
+
+    args = parser.parse_args()
+
+    indexer = RAGIndexer(
+        collection_base_name=args.collection,
+        batch_size=args.batch_size,
+        df=pd.read_csv(args.csv, sep=",", on_bad_lines='skip')
+    )
+
     indexer.build_vectorstore()
+

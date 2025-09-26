@@ -11,6 +11,7 @@ class RAGPromptSystem:
         parser = advisor_instance.output_parser()
         # Pipe it through the LLM and parse
         chain = prompt | self.llm | parser
+        print(context)
         return chain.invoke({
             "enquiry": enquiry,
             "context": context

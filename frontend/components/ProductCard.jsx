@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product, index }) => {
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
   const imagePath = `/static/product_image/image_product_${index + 1}.png`;
 
   // Render rating as stars
@@ -33,7 +35,7 @@ const ProductCard = ({ product, index }) => {
         }}
         onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
         onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-        onClick={() => setShowModal(true)}
+        onClick={() => setShowModal(true)} // open modal
       >
         <div style={{ backgroundColor: "#fff", padding: "10px" }}>
           <img
@@ -65,6 +67,26 @@ const ProductCard = ({ product, index }) => {
           >
             ${product.discounted_price.toFixed(2)}
           </p>
+
+          {/* View Details Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation(); // prevent modal open
+              navigate(`/product/${product.product_id}`); // navigate to product page
+            }}
+            style={{
+              marginTop: "5px",
+              padding: "5px 10px",
+              fontSize: "0.8rem",
+              borderRadius: "6px",
+              border: "none",
+              cursor: "pointer",
+              backgroundColor: "#7c2d12",
+              color: "#fff",
+            }}
+          >
+            Order Now
+          </button>
         </div>
       </div>
 

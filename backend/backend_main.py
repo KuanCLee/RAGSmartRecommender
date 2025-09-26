@@ -35,8 +35,8 @@ class QueryRequest(BaseModel):
    
 # Instantiate the vector indexer
 indexer = RAGIndexer(
-    collection_base_name="amazon_sales",
-    persist_dir="./vector_database",
+    collection_base_name="glasses_sales",
+    persist_dir="./RAG/vector_database",
     batch_size=5,
     openai_api_key=openai_api_key
 )
@@ -46,7 +46,7 @@ def run_rag(request: QueryRequest):
     query = request.query
 
     # Step 2: Retrieve top documents as context
-    retrieved_docs = indexer.query_vectorstore(query, collection_name="amazon_sales", top_k=5)
+    retrieved_docs = indexer.query_vectorstore(query, collection_name="glasses_sales", top_k=5)
 
     # Combine documents into a single context string
     context = "\n\n".join([doc.page_content for doc in retrieved_docs])

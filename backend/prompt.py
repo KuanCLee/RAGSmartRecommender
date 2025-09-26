@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from typing import List
 
 class Product(BaseModel):
+    product_id: int
     name: str
     relevance_score: float
     description: str
@@ -26,7 +27,7 @@ class RAGInstructionsGenerator:
             </role>
 
             <task>
-                - Please identify the 5 most relevant products that match the customer's requirements.
+                - Please identify the 3 most relevant products that match the customer's requirements.
             </task>
 
             <guidelines>

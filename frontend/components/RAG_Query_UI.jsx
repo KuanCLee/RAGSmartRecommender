@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function RAGQueryUI({ responses, setResponses }) {
   const [query, setQuery] = useState("");
@@ -44,21 +45,50 @@ export default function RAGQueryUI({ responses, setResponses }) {
 
             {r.answer ? (
               r.answer.products.map((product, i) => (
-                <div key={i} style={{
-                  border: "1px solid #ddd",
-                  borderRadius: "8px",
-                  padding: "12px",
-                  marginBottom: "10px",
-                  backgroundColor: "#f9f9f9",
-                  boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-                }}>
-                  <h3 style={{ margin: "0 0 6px 0", fontWeight: "bold", color: "#047857" }}>{product.name}</h3>
-                  <p style={{ margin: "0 0 4px 0", color: "#555" }}><strong>Relevance:</strong> {(product.relevance_score * 100).toFixed(0)}%</p>
-                  <p style={{ margin: "0 0 4px 0", color: "#333" }}><strong>Description:</strong> {product.description.split("|").join(". ")}</p>
-                  <p style={{ margin: "0", color: "#333" }}><strong>Reason:</strong> {product.reason}</p>
+                <div
+                  key={i}
+                  style={{
+                    border: "1px solid #ddd",
+                    borderRadius: "8px",
+                    padding: "12px",
+                    marginBottom: "10px",
+                    backgroundColor: "#f9f9f9",
+                    boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <h3 style={{ margin: "0 0 6px 0", fontWeight: "bold", color: "#047857" }}>
+                    {product.name}
+                  </h3>
+                  <p style={{ margin: "0 0 4px 0", color: "#555" }}>
+                    <strong>Relevance:</strong> {(product.relevance_score * 100).toFixed(0)}%
+                  </p>
+                  <p style={{ margin: "0 0 4px 0", color: "#333" }}>
+                    <strong>Description:</strong> {product.description.split("|").join(". ")}
+                  </p>
+                  <p style={{ margin: "0", color: "#333" }}>
+                    <strong>Reason:</strong> {product.reason}
+                  </p>
+
+                  {/* Link to ProductPage */}
+                  <Link
+                    to={`/product/${product.product_id}`}
+                    style={{
+                      display: "inline-block",
+                      marginTop: "10px",
+                      padding: "6px 12px",
+                      backgroundColor: "#047857",
+                      color: "#fff",
+                      borderRadius: "6px",
+                      textDecoration: "none",
+                    }}
+                  >
+                    View Details
+                  </Link>
                 </div>
               ))
-            ) : loading ? <p>Loading...</p> : null}
+              ) : loading ? (
+              <p>Loading...</p>
+            ) : null}
           </div>
         ))}
       </div>

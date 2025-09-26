@@ -1,12 +1,10 @@
+// Shop.jsx
 import React, { useEffect, useState } from "react";
 import Papa from "papaparse";
 import ProductCard from "../components/ProductCard";
-import RAGQueryUI from "../components/RAG_Query_UI";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
-  const [chatOpen, setChatOpen] = useState(false); // chat box toggle
-  const [responses, setResponses] = useState([]);  // store chat context globally
 
   useEffect(() => {
     Papa.parse("/static/product_data/products.csv", {
@@ -30,14 +28,13 @@ const Shop = () => {
 
   return (
     <div style={{ position: "relative", backgroundColor: "#f9f9efff" }}>
-      {/* Banner */}
+      {/* Banner with original overlay format */}
       <div
         style={{
           position: "relative",
           width: "100%",
-          height: "auto",
-          aspectRatio: "1000/400",
-          backgroundImage: "url('/static/banner.jpg')",
+          aspectRatio: "2000/800",
+          backgroundImage: "url('/static/banner.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           display: "flex",
@@ -64,7 +61,7 @@ const Shop = () => {
         </h1>
       </div>
 
-      {/* Shop content */}
+      {/* Product Grid */}
       <div style={{ paddingTop: "260px", padding: "20px", maxWidth: "1200px", margin: "0 auto" }}>
         <div
           style={{
@@ -77,73 +74,6 @@ const Shop = () => {
             <ProductCard key={idx} product={product} index={idx} />
           ))}
         </div>
-      </div>
-
-      {/* Floating Chat Box */}
-      <div
-        style={{
-          position: "fixed",
-          bottom: "20px",
-          right: "20px",
-          width: chatOpen ? "350px" : "60px",
-          height: chatOpen ? "400px" : "60px",
-          transition: "all 0.3s",
-          boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
-          borderRadius: "12px",
-          overflow: "hidden",
-          zIndex: 999,
-          backgroundColor: "#fff",
-        }}
-      >
-        {chatOpen ? (
-          <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-            {/* Chat header */}
-            <div
-              style={{
-                backgroundColor: "#047857",
-                color: "#fff",
-                padding: "8px",
-                cursor: "pointer",
-              }}
-              onClick={() => setChatOpen(false)}
-            >
-              Product Assistant
-            </div>
-
-            {/* Chat content */}
-            <div style={{ flex: 1, overflowY: "auto" }}>
-              <RAGQueryUI responses={responses} setResponses={setResponses} />
-            </div>
-          </div>
-        ) : (
-          <div
-            style={{
-              position: "fixed",
-              bottom: "20px",
-              right: "20px",
-              width: "250px",
-              minWidth: "250px",
-              height: "50px",
-              minHeight: "50px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "#047857",
-              color: "#fff",
-              cursor: "pointer",
-              fontWeight: "bold",
-              textAlign: "center",
-              padding: "10px",
-              borderRadius: "12px",
-              lineHeight: "1.2",
-              whiteSpace: "normal",
-              zIndex: 9999,
-            }}
-            onClick={() => setChatOpen(true)}
-          >
-            Need help finding a product? Ask me!
-          </div>
-        )}
       </div>
     </div>
   );
