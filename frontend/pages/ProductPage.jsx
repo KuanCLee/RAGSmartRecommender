@@ -1,9 +1,8 @@
-// ProductPage.jsx
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Papa from "papaparse";
 
-export default function ProductPage() {
+export default function ProductPage({ addToCart }) {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
@@ -12,7 +11,9 @@ export default function ProductPage() {
       download: true,
       header: true,
       complete: (results) => {
-        const p = results.data.find(row => parseInt(row.product_id) === parseInt(id));
+        const p = results.data.find(
+          (row) => parseInt(row.product_id) === parseInt(id)
+        );
         setProduct(p);
       },
     });
@@ -21,8 +22,15 @@ export default function ProductPage() {
   if (!product) return <p>Loading...</p>;
 
   return (
-    <div style={{ maxWidth: "1000px", margin: "40px auto", display: "flex", gap: "40px", padding: "0 20px" }}>
-      
+    <div
+      style={{
+        maxWidth: "1000px",
+        margin: "40px auto",
+        display: "flex",
+        gap: "40px",
+        padding: "0 20px",
+      }}
+    >
       {/* Product Image */}
       <div style={{ flex: 1 }}>
         <img
@@ -57,6 +65,7 @@ export default function ProductPage() {
         </div>
 
         <button
+          onClick={() => addToCart(product)}
           style={{
             backgroundColor: "#047857",
             color: "#fff",
@@ -71,6 +80,7 @@ export default function ProductPage() {
         >
           Add to Cart
         </button>
+
       </div>
     </div>
   );

@@ -2,10 +2,12 @@ import React, { useRef, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
 import Shop from "./pages/Shop";
 import ProductPage from "./pages/ProductPage";
-import RAGQueryUI from "./components/RAG_Query_UI";
+import Checkout from "./pages/Checkout";
+import FloatingCart from "./components/FloatingCart";
 import landingVideo from "/landingVideo.mp4";
 import speakerOn from "/speaker-on.png";
 import speakerOff from "/speaker-off.png";
+import RAGQueryUI from "./components/RAG_Query_UI";
 
 function VideoBanner() {
   const location = useLocation();
@@ -20,7 +22,8 @@ function VideoBanner() {
     }
   };
 
-  if (location.pathname.startsWith("/product/")) return null;
+  // Only show video on Shop pages
+  if (location.pathname !== "/" && location.pathname !== "/shop") return null;
 
   return (
     <div style={{ position: "relative" }}>
@@ -57,21 +60,61 @@ function VideoBanner() {
 }
 
 export default function App() {
+  const [cart, setCart] = useState([]);
+  const [cartOpen, setCartOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   const [responses, setResponses] = useState([]);
 
+  const addToCart = (product) => {
+    const exists = cart.find((p) => p.product_id === product.product_id);
+    if (exists) {
+      setCart(cart.map((p) =>
+        p.product_id === product.product_id
+          ? { ...p, quantity: p.quantity + 1 }
+          : p
+      ));
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    }
+  };
+
+  const updateQuantity = (product_id, delta) => {
+    setCart(prevCart =>
+      prevCart
+        .map(p =>
+          p.product_id === product_id
+            ? { ...p, quantity: p.quantity + delta }
+            : p
+        )
+        .filter(p => p.quantity > 0) // remove items with quantity 0
+    );
+  };
+
   return (
     <Router>
-      <nav style={{ padding: "10px", background: "white", zIndex: 10, position: "relative" }}>
-        <Link to="/shop">Shop</Link>
-      </nav>
+      {/* NAV */}
+      <div style={{ display: "flex", alignItems: "center", padding: "10px", backgroundColor: "white", gap: "20px" }}>
+        <Link to="/shop" style={{ fontWeight: "bold" }}>Shop</Link>
+      </div>
 
+      {/* Floating Cart */}
+      <FloatingCart
+        cart={cart}
+        updateQuantity={updateQuantity}
+        onClose={() => setCartOpen(false)}
+        cartOpen={cartOpen}
+        toggleCart={() => setCartOpen(!cartOpen)}
+      />
+
+      {/* Video Banner */}
       <VideoBanner />
 
+      {/* Routes */}
       <Routes>
-        <Route path="/" element={<Shop />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/" element={<Shop addToCart={addToCart} />} />
+        <Route path="/shop" element={<Shop addToCart={addToCart} />} />
+        <Route path="/product/:id" element={<ProductPage addToCart={addToCart} />} />
+        <Route path="/checkout" element={<Checkout cart={cart} />} />
       </Routes>
 
       {/* Persistent RAG Chat Box */}

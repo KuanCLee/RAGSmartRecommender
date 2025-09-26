@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Papa from "papaparse";
 import ProductCard from "../components/ProductCard";
 
-const Shop = () => {
+const Shop = ({addToCart}) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -71,7 +71,8 @@ const Shop = () => {
           }}
         >
           {products.map((product, idx) => (
-            <ProductCard key={idx} product={product} index={idx} />
+            <ProductCard key={idx} product={product} index={idx} onAddToCart={addToCart} />
+
           ))}
         </div>
       </div>
