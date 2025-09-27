@@ -3,9 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <title>My React App</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-H5BQT64X0E');
+    </script>
   </head>
   <body>
-    <div id="root"></div>  <!-- React will inject content here -->
+    <div id="root"></div> <!-- React will inject content here -->
     <script type="module" src="main.jsx"></script>
   </body>
 </html>
