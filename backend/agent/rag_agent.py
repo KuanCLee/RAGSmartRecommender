@@ -133,4 +133,3 @@ if __name__ == "__main__":
     )
 
     indexer.build_vectorstore()
-

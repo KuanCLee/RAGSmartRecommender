@@ -1,41 +1,31 @@
 import os
 import sys
-# Add project root to Python path
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
-import io
 from dotenv import load_dotenv
-import json
-from backend.agent.build_vectorstore import RAGIndexer
+from backend.agent.rag_agent import RAGIndexer
 from backend.agent.agentic_system import RAGPromptSystem 
 from backend.agent.llm_loader import get_llm  
 from fastapi import FastAPI
-from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from backend.schemas import QueryRequest
 
 app = FastAPI()
 
-# Allow your frontend origin
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # or ["*"] to allow all origins
-    allow_credentials=True,
+    allow_origins=["*"],  
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Optional: only load .env if exists (local development)
 if os.path.exists("Kuan.env"):
     load_dotenv(dotenv_path="Kuan.env")
 
-# Always read environment variable
 openai_api_key = os.getenv("OPENAI_API_KEY")
 if openai_api_key is None:
     raise ValueError("OPENAI_API_KEY is not set in environment variables!")
-
-class QueryRequest(BaseModel):
-    query:str
    
 # Instantiate the vector indexer
 indexer = RAGIndexer(

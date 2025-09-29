@@ -1,5 +1,4 @@
-from backend.prompt import RAGInstructionsGenerator
-
+from backend.agent.prompt import RAGInstructionsGenerator
 class RAGPromptSystem:
     def __init__(self, llm):
         self.llm = llm  # Assumes llm is passed in during initialization

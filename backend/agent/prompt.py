@@ -1,17 +1,6 @@
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.prompts import PromptTemplate
-from pydantic import BaseModel
-from typing import List
-
-class Product(BaseModel):
-    product_id: int
-    name: str
-    relevance_score: float
-    description: str
-    reason: str
-
-class RAGPydanticModel(BaseModel):
-    products: List[Product]
+from backend.schemas import RAGPydanticModel
 
 class RAGInstructionsGenerator:
     def output_parser(self):
