@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Papa from "papaparse";
 
-export default function ProductPage({ addToCart }) {
+export default function Product({ addToCart }) {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 

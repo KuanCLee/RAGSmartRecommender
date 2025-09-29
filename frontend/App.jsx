@@ -1,63 +1,11 @@
-import React, { useRef, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
-import Shop from "./pages/Shop";
-import ProductPage from "./pages/ProductPage";
-import Checkout from "./pages/Checkout";
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Shop from "./pages/ShopPage";
+import Product from "./pages/ProductPage";
+import Checkout from "./pages/CheckoutPage";
 import FloatingCart from "./components/FloatingCart";
-import landingVideo from "/landingVideo.mp4";
-import speakerOn from "/speaker-on.png";
-import speakerOff from "/speaker-off.png";
 import RAGQueryUI from "./components/RAG_Query_UI";
-
-function VideoBanner() {
-  const location = useLocation();
-  const videoRef = useRef(null);
-  const [soundOn, setSoundOn] = useState(false);
-
-  const toggleSound = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = soundOn;
-      setSoundOn(!soundOn);
-      if (!soundOn) videoRef.current.play().catch(() => {});
-    }
-  };
-
-  // Only show video on Shop pages
-  if (location.pathname !== "/" && location.pathname !== "/shop") return null;
-
-  return (
-    <div style={{ position: "relative" }}>
-      <video
-        ref={videoRef}
-        src={landingVideo}
-        autoPlay
-        loop
-        muted
-        playsInline
-        style={{ width: "100vw", height: "auto", display: "block" }}
-      />
-      <button
-        onClick={toggleSound}
-        style={{
-          position: "absolute",
-          top: "50px",
-          left: "20px",
-          background: "transparent",
-          border: "none",
-          cursor: "pointer",
-          zIndex: 10,
-          padding: 0,
-        }}
-      >
-        <img
-          src={soundOn ? speakerOn : speakerOff}
-          alt={soundOn ? "Sound On" : "Muted"}
-          style={{ width: "32px", height: "32px" }}
-        />
-      </button>
-    </div>
-  );
-}
+import VideoBanner from "./components/VideoBanner"; 
 
 export default function App() {
   const [cart, setCart] = useState([]);
@@ -124,7 +72,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Shop addToCart={addToCart} />} />
         <Route path="/shop" element={<Shop addToCart={addToCart} />} />
-        <Route path="/product/:id" element={<ProductPage addToCart={addToCart} />} />
+        <Route path="/product/:id" element={<Product addToCart={addToCart} />} />
         <Route path="/checkout" element={<Checkout cart={cart} />} />
       </Routes>
 
