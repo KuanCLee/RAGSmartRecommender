@@ -40,7 +40,7 @@ function VideoBanner() {
         onClick={toggleSound}
         style={{
           position: "absolute",
-          top: "20px",
+          top: "50px",
           left: "20px",
           background: "transparent",
           border: "none",
@@ -92,9 +92,23 @@ export default function App() {
 
   return (
     <Router>
+      {/* Video Banner */}
+      <VideoBanner />
+
       {/* NAV */}
-      <div style={{ display: "flex", alignItems: "center", padding: "10px", backgroundColor: "white", gap: "20px" }}>
-        <Link to="/shop" style={{ fontWeight: "bold" }}>Shop</Link>
+      <div style={{
+            position: "absolute", 
+            top: 0,
+            left: 0,
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            padding: "10px",
+            backgroundColor: "transparent", 
+            gap: "20px",
+            zIndex: 1000,
+            }}>
+        <Link to="/shop" style={{ fontWeight: "bold" } }>Shop</Link>
       </div>
 
       {/* Floating Cart */}
@@ -105,9 +119,6 @@ export default function App() {
         cartOpen={cartOpen}
         toggleCart={() => setCartOpen(!cartOpen)}
       />
-
-      {/* Video Banner */}
-      <VideoBanner />
 
       {/* Routes */}
       <Routes>
